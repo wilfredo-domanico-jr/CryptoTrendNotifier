@@ -47,6 +47,7 @@ def predict_price(history):
     return round(model.predict(future_day)[0], 2)
 
 # Function to send webhook notifications
+
 def send_notification(message):
     if WEBHOOK_URL == "YOUR_WEBHOOK_URL_HERE":
         print(f"[Notification] {message}")

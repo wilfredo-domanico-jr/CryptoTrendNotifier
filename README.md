@@ -3,13 +3,13 @@
 [![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-**CryptoTrendNotifier** is a Python application that tracks real-time Bitcoin prices, sends instant alerts for significant price changes, and predicts future price trends using machine learning. It’s built with APIs, webhooks, and data-driven forecasting techniques, making it ideal for crypto enthusiasts, traders, and developers exploring financial data applications.
+**CryptoTrendNotifier** is a Python application that tracks real-time Cryptocurrency prices, sends instant alerts for significant price changes, and predicts future price trends using machine learning. It’s built with APIs, webhooks, and data-driven forecasting techniques, making it ideal for crypto enthusiasts, traders, and developers exploring financial data applications.
 
 ---
 
 ## Features
 
-- Real-time Bitcoin price tracking using public APIs.
+- Real-time Cryptocurrency price tracking using public APIs.
 - Instant notifications for significant price movements.
 - Predictive modeling for future price trends using machine learning.
 - Integration with webhooks to send alerts to external services.
@@ -22,7 +22,7 @@
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/CryptoTrendNotifier.git
+git clone https://github.com/wilfredo-domanico-jr/CryptoTrendNotifier.git
 cd CryptoTrendNotifier
 ```
 
@@ -53,7 +53,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-3. Monitor real-time Bitcoin prices and receive alerts on your configured service.
+3. Monitor real-time Cryptocurrency prices and receive alerts on your configured service.
 
 ---
 
@@ -64,19 +64,7 @@ python main.py
 - `pandas` – data manipulation
 - `scikit-learn` – machine learning predictions
 - Webhooks – notifications to external services
-- Optional: Django / Flask if using a web app interface
-
----
-
-## Contributing
-
-Contributions are welcome!
-
-- Fork the repository
-- Create a new branch (`git checkout -b feature-name`)
-- Commit your changes (`git commit -m "Add feature"`)
-- Push to the branch (`git push origin feature-name`)
-- Open a Pull Request
+- Flask for web app interface
 
 ---
 
@@ -85,13 +73,3 @@ Contributions are welcome!
 This project is licensed under the [MIT License](LICENSE).
 
 ---
-
-## Acknowledgements
-
-- Python Requests library documentation
-- Real-time Bitcoin API providers
-- Machine learning tutorials for financial forecasting
-
----
-
-## Screenshots / Example Outp
