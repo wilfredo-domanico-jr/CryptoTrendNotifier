@@ -1,6 +1,6 @@
 # CryptoTrendNotifier 🚀
 
-[![Python](https://img.shields.io/badge/Python-3.6%2B-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 **CryptoTrendNotifier** is a Python application that tracks real-time Bitcoin prices, sends instant alerts for significant price changes, and predicts future price trends using machine learning. It’s built with APIs, webhooks, and data-driven forecasting techniques, making it ideal for crypto enthusiasts, traders, and developers exploring financial data applications.
