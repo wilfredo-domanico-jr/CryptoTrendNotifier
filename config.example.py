@@ -1,10 +1,13 @@
-# Copy this file to config.py and add your real keys
+# Copy to config.py and update
 
-# Example API for getting Bitcoin price
-BTC_API_URL = "https://api.coindesk.com/v1/bpi/currentprice/BTC.json"
+# List of cryptocurrencies to track
+CRYPTOCURRENCIES = ["BTC", "ETH", "LTC"]
 
-# Webhook URL for notifications (Discord / Pushbullet / etc.)
+# API URL (using CoinGecko free API)
+API_URL = "https://api.coingecko.com/api/v3/simple/price"
+
+# Webhook URL for notifications
 WEBHOOK_URL = "YOUR_WEBHOOK_URL_HERE"
 
 # Prediction settings
-PREDICTION_DAYS = 5  # Number of days ahead to predict
+PREDICTION_DAYS = 5
