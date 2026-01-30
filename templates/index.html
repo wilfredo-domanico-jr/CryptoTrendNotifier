@@ -57,7 +57,9 @@
               💰
             </div>
           </div>
-          <div class="stat-value" id="marketCap">$2.1T</div>
+          <div class="stat-value" id="marketCap">
+            ${{ "{:,.2f}".format(total_market_cap / 1_000_000_000_000) }}T
+          </div>
           <div class="stat-change positive">
             <span>↗</span>
             <span>+5.2% (24h)</span>

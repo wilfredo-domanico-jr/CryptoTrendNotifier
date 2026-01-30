@@ -9,17 +9,31 @@ app = Flask(__name__)
 
 # Store price history for predictions
 price_history = {coin: [] for coin in CRYPTOCURRENCIES}
+market_cap_history = []
 
 # Function to fetch cryptocurrency prices
-def get_crypto_prices():
+def get_crypto_data():
     coin_ids = ','.join(CRYPTOCURRENCIES.values())
-    response = requests.get(API_URL, params={'ids': coin_ids, 'vs_currencies': 'usd'})
+    response = requests.get(
+        API_URL,
+        params={
+            'ids': coin_ids,
+            'vs_currencies': 'usd',
+            'include_market_cap': 'true'
+        }
+    )
     data = response.json()
-    
-    # Map API data back to tickers
-    prices = {ticker: data[coin_id]['usd'] for ticker, coin_id in CRYPTOCURRENCIES.items()}
-    return prices
 
+    prices = {}
+    market_caps = {}
+
+    for ticker, coin_id in CRYPTOCURRENCIES.items():
+        prices[ticker] = data[coin_id]['usd']
+        market_caps[ticker] = data[coin_id]['usd_market_cap']
+
+    total_market_cap = sum(market_caps.values())
+
+    return prices, market_caps, total_market_cap
 # Function to predict future price using linear regression
 def predict_price(history):
     if len(history) < 2:
@@ -47,7 +61,7 @@ def send_notification(message):
 @app.route("/")
 def dashboard():
     global price_history
-    prices = get_crypto_prices()
+    prices, market_caps, total_market_cap = get_crypto_data()
     predictions = {}
 
     for coin, price in prices.items():
@@ -68,7 +82,14 @@ def dashboard():
             if abs(change) >= 5:
                 send_notification(f"{coin} price changed {change:.2f}%: Current ${price}, Predicted ${predicted}")
 
-    return render_template("index.html", prices=prices, predictions=predictions, timestamp=datetime.now())
+    return render_template(
+    "index.html",
+    prices=prices,
+    predictions=predictions,
+    market_caps=market_caps,
+    total_market_cap=total_market_cap,
+    timestamp=datetime.now()
+)
 
 if __name__ == "__main__":
     app.run(debug=True)
