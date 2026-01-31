@@ -104,10 +104,16 @@
               👑
             </div>
           </div>
-          <div class="stat-value" id="btcDominance">52.3%</div>
-          <div class="stat-change negative">
-            <span>↘</span>
-            <span>-0.4% (24h)</span>
+          <div class="stat-value" id="btcDominance">
+            {{ "{:.1f}%".format(btc_dominance) }}
+          </div>
+          <div
+            class="stat-change {% if btc_dominance_change >= 0 %}positive{% else %}negative{% endif %}"
+          >
+            <span
+              >{% if btc_dominance_change >= 0 %}↗{% else %}↘{% endif %}</span
+            >
+            <span>{{ "{:+.1f}%".format(btc_dominance_change) }} (24h)</span>
           </div>
         </div>
 

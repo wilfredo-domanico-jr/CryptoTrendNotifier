@@ -59,3 +59,12 @@ def send_notification(message):
         requests.post(WEBHOOK_URL, json={"content": message})
     except Exception as e:
         print(f"Webhook error: {e}")
+
+
+
+def get_btc_dominance():
+    url = f"{API_URL}/global"
+    response = requests.get(url)
+    data = response.json()
+    dominance = data['data']['market_cap_percentage']['btc']  # BTC dominance %
+    return dominance

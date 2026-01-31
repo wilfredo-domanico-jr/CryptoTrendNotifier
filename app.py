@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from datetime import datetime
-from crypto_utils import get_top_coins, get_crypto_data, predict_price, send_notification
+from crypto_utils import get_top_coins, get_crypto_data, predict_price, send_notification, get_btc_dominance
 
 app = Flask(__name__)
 
@@ -9,6 +9,7 @@ CRYPTOCURRENCIES = get_top_coins(limit=5)
 price_history = {coin: [] for coin in CRYPTOCURRENCIES}
 market_cap_history = []
 volume_history = []
+btc_dominance_history = []
 
 @app.route("/")
 def dashboard():
@@ -44,6 +45,21 @@ def dashboard():
     else:
         total_volume_change = 0
 
+    # --- BTC Dominance ---
+    btc_dominance = get_btc_dominance()
+    btc_dominance_history.append(btc_dominance)
+
+    # Keep last 2 entries to calculate 24h change
+    if len(btc_dominance_history) > 2:
+        btc_dominance_history.pop(0)
+
+    if len(btc_dominance_history) > 1:
+        prev_dominance = btc_dominance_history[-2]
+        btc_dominance_change = btc_dominance - prev_dominance  # can be negative
+    else:
+        btc_dominance_change = 0
+
+
     # Price predictions & notifications
     predictions = {}
     for coin, price in prices.items():
@@ -73,6 +89,8 @@ def dashboard():
         total_market_cap_change=total_market_cap_change,
         total_volume=total_volume,                
         total_volume_change=total_volume_change, 
+        btc_dominance=btc_dominance,             
+        btc_dominance_change=btc_dominance_change,
         timestamp=datetime.now()
     )
 
