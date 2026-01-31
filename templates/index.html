@@ -60,9 +60,14 @@
           <div class="stat-value" id="marketCap">
             ${{ "{:,.2f}".format(total_market_cap / 1_000_000_000_000) }}T
           </div>
-          <div class="stat-change positive">
-            <span>↗</span>
-            <span>+5.2% (24h)</span>
+          <div
+            class="stat-change {% if total_market_cap_change >= 0 %}positive{% else %}negative{% endif %}"
+          >
+            <span
+              >{% if total_market_cap_change >= 0 %}↗{% else %}↘{% endif
+              %}</span
+            >
+            <span>{{ "{:+.2f}%".format(total_market_cap_change) }} (24h)</span>
           </div>
         </div>
 
