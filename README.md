@@ -31,7 +31,7 @@ Cryptocurrency trading is highly speculative and involves significant risk. User
 
 - Real-time Cryptocurrency price tracking using public APIs.
 - Instant notifications for significant price movements.
-- Predictive modeling for future price trends using machine learning.
+- Predictive modeling for future price trends using machine learning (currently using linear regression; more advanced models coming soon).
 - Integration with webhooks to send alerts to external services.
 - Modular Python code for easy customization and extension.
 
