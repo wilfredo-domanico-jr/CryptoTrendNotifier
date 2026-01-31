@@ -7,6 +7,14 @@
 
 ---
 
+## Screenshot
+
+<p align="center">
+  <img src="static/images/screenshot.png" alt="MiniURL Screenshot" width="700">
+</p>
+
+---
+
 ## Features
 
 - Real-time Cryptocurrency price tracking using public APIs.
