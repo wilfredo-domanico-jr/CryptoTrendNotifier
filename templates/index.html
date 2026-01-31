@@ -229,63 +229,27 @@
             style="margin-top: 30px"
           >
             <h3 class="chart-title">Recent Activity</h3>
+
+            {% for activity in activity_log %}
             <div class="activity-item">
               <div
                 class="activity-icon"
-                style="
-                  background: rgba(34, 197, 94, 0.2);
-                  color: var(--success);
-                "
+                style="background: rgba({% if activity.color == 'success' %}34,197,94{% elif activity.color == 'primary' %}99,102,241{% elif activity.color == 'warning' %}245,158,11{% elif activity.color == 'danger' %}239,68,68{% else %}168,85,247{% endif %}, 0.2); color: var(--{{ activity.color }});"
               >
-                📈
+                {{ activity.icon }}
               </div>
               <div class="activity-content">
-                <div class="activity-title">Price Alert Triggered</div>
-                <div class="activity-time">2 minutes ago</div>
+                <div class="activity-title">{{ activity.title }}</div>
+                <div class="activity-time">{{ activity.time }}</div>
               </div>
             </div>
+            {% endfor %} {% if activity_log|length == 0 %}
             <div class="activity-item">
-              <div
-                class="activity-icon"
-                style="
-                  background: rgba(99, 102, 241, 0.2);
-                  color: var(--primary);
-                "
-              >
-                🔄
-              </div>
               <div class="activity-content">
-                <div class="activity-title">Data Refresh Complete</div>
-                <div class="activity-time">5 minutes ago</div>
+                <div class="activity-title">No recent activity</div>
               </div>
             </div>
-            <div class="activity-item">
-              <div
-                class="activity-icon"
-                style="
-                  background: rgba(245, 158, 11, 0.2);
-                  color: var(--warning);
-                "
-              >
-                ⚡
-              </div>
-              <div class="activity-content">
-                <div class="activity-title">New Prediction Generated</div>
-                <div class="activity-time">12 minutes ago</div>
-              </div>
-            </div>
-            <div class="activity-item">
-              <div
-                class="activity-icon"
-                style="background: rgba(168, 85, 247, 0.2); color: #a855f7"
-              >
-                🎯
-              </div>
-              <div class="activity-content">
-                <div class="activity-title">Target Price Reached</div>
-                <div class="activity-time">1 hour ago</div>
-              </div>
-            </div>
+            {% endif %}
           </div>
         </div>
       </div>
