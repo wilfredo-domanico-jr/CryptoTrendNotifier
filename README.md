@@ -3,6 +3,16 @@
 [![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
+---
+
+## Disclaimer
+
+The CryptoTrendNotifier provides trend analysis and predictions based on historical cryptocurrency data and algorithmic models. **These predictions are not guaranteed and should not be considered financial advice.**
+
+Cryptocurrency trading is highly speculative and involves significant risk. Users are solely responsible for any investment decisions made based on information from this tool. The developers of this project **are not liable** for any losses, damages, or financial consequences resulting from the use of this software.
+
+---
+
 **CryptoTrendNotifier** is a Python application that tracks real-time Cryptocurrency prices, sends instant alerts for significant price changes, and predicts future price trends using machine learning. It’s built with APIs, webhooks, and data-driven forecasting techniques, making it ideal for crypto enthusiasts, traders, and developers exploring financial data applications.
 
 ---
