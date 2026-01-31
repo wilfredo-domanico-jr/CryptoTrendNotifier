@@ -80,11 +80,11 @@ python main.py
 ## Technologies & Libraries
 
 - Python 3.13+
-- `requests` – HTTP API requests
-- `pandas` – data manipulation
-- `scikit-learn` – machine learning predictions
+- requests – HTTP API requests
+- pandas – data manipulation
+- scikit-learn – basic predictive modeling (currently linear regression)
 - Webhooks – notifications to external services
-- Flask for web app interface
+- Flask – web app interface
 
 ---
 
