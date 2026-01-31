@@ -230,20 +230,25 @@
           >
             <h3 class="chart-title">Recent Activity</h3>
 
-            {% for activity in activity_log %}
+            {% set recent_activities = activity_log[-3:][::-1] %} {# last 3,
+            newest first #} {% if recent_activities|length > 0 %} {% for
+            activity in recent_activities %} {% set bg_color = ( '34,197,94' if
+            activity.color == 'success' else '99,102,241' if activity.color ==
+            'primary' else '245,158,11' if activity.color == 'warning' else
+            '239,68,68' if activity.color == 'danger' else '168,85,247' ) %}
             <div class="activity-item">
               <div
                 class="activity-icon"
-                style="background: rgba({% if activity.color == 'success' %}34,197,94{% elif activity.color == 'primary' %}99,102,241{% elif activity.color == 'warning' %}245,158,11{% elif activity.color == 'danger' %}239,68,68{% else %}168,85,247{% endif %}, 0.2); color: var(--{{ activity.color }});"
+                style="background: rgba({{ bg_color }}, 0.2); color: var(--{{ activity.color }});"
               >
                 {{ activity.icon }}
               </div>
               <div class="activity-content">
                 <div class="activity-title">{{ activity.title }}</div>
-                <div class="activity-time">{{ activity.time }}</div>
+                <div class="activity-time">{{ activity.time_ago }}</div>
               </div>
             </div>
-            {% endfor %} {% if activity_log|length == 0 %}
+            {% endfor %} {% else %}
             <div class="activity-item">
               <div class="activity-content">
                 <div class="activity-title">No recent activity</div>

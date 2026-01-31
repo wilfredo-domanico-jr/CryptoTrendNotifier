@@ -17,19 +17,36 @@ MAX_ACTIVITY = 10
 # ----------------------------
 # Helper: add activity
 # ----------------------------
-def add_activity(title, icon="ℹ️", color="primary", time_text="Just now"):
-    """
-    Add a new activity to the log.
-    """
+def add_activity(title, icon="ℹ️", color="primary"):
+    """Add a new activity to the log with timestamp."""
     activity_log.append({
         "title": title,
         "icon": icon,
         "color": color,
-        "time": time_text
+        "time": datetime.now()  # store actual datetime
     })
     if len(activity_log) > MAX_ACTIVITY:
         activity_log.pop(0)
 
+
+
+# ----------------------------
+# Helper: compute "time ago"
+# ----------------------------
+def time_ago_string(past_time):
+    """Return human-readable relative time."""
+    delta = datetime.now() - past_time
+    seconds = int(delta.total_seconds())
+    if seconds < 60:
+        return "Just now"
+    minutes = seconds // 60
+    if minutes < 60:
+        return f"{minutes} minute{'s' if minutes > 1 else ''} ago"
+    hours = minutes // 60
+    if hours < 24:
+        return f"{hours} hour{'s' if hours > 1 else ''} ago"
+    days = hours // 24
+    return f"{days} day{'s' if days > 1 else ''} ago"
 
 
 @app.route("/")
@@ -96,7 +113,7 @@ def dashboard():
         predictions[coin] = predicted
 
         # Add "New Prediction Generated" activity
-        add_activity(f"New Prediction Generated for {coin}", "⚡", "warning", "Just now")
+        add_activity(f"New Prediction Generated for {coin}", "⚡", "warning")
 
 
         if len(price_history[coin]) > 1:
@@ -104,10 +121,18 @@ def dashboard():
             change = ((price - prev_price) / prev_price) * 100
             if abs(change) >= 5:
                 send_notification(f"{coin} price changed {change:.2f}%: Current ${price}, Predicted ${predicted}")
-                add_activity("Price Alert Triggered", "📈", "success", "Just now")
+                add_activity("Price Alert Triggered", "📈", "success")
         
     # Add data refresh activity
-    add_activity("Data Refresh Complete", "🔄", "primary", "Just now")
+    add_activity("Data Refresh Complete", "🔄", "primary")
+
+    
+    recent_activities = [
+        {
+            **act,
+            "time_ago": time_ago_string(act["time"])
+        } for act in activity_log[-3:][::-1]
+    ]
 
     return render_template(
         "index.html",
@@ -120,7 +145,7 @@ def dashboard():
         total_volume_change=total_volume_change, 
         btc_dominance=btc_dominance,             
         btc_dominance_change=btc_dominance_change,
-         activity_log=activity_log[-3:],  # only the last 3 activities in order to prevent overloading
+        activity_log=recent_activities,  # last 3 with proper time
         timestamp=datetime.now()
     )
 
