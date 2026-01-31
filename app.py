@@ -8,7 +8,7 @@ app = Flask(__name__)
 CRYPTOCURRENCIES = get_top_coins(limit=5)
 price_history = {coin: [] for coin in CRYPTOCURRENCIES}
 market_cap_history = []
-
+volume_history = []
 
 @app.route("/")
 def dashboard():
@@ -27,6 +27,22 @@ def dashboard():
         total_market_cap_change = ((total_market_cap - prev_total) / prev_total) * 100
     else:
         total_market_cap_change = 0
+
+
+    # --- Track total trading volume ---
+    total_volume = sum(market_caps.values())  # sum of all coins' market cap as volume proxy
+    volume_history.append(total_volume)
+
+    # Keep last 2 entries for % change
+    if len(volume_history) > 2:
+        volume_history.pop(0)
+
+    # Calculate 24h % change
+    if len(volume_history) > 1:
+        prev_volume = volume_history[-2]
+        total_volume_change = ((total_volume - prev_volume) / prev_volume) * 100
+    else:
+        total_volume_change = 0
 
     # Price predictions & notifications
     predictions = {}
@@ -55,6 +71,8 @@ def dashboard():
         market_caps=market_caps,
         total_market_cap=total_market_cap,
         total_market_cap_change=total_market_cap_change,
+        total_volume=total_volume,                
+        total_volume_change=total_volume_change, 
         timestamp=datetime.now()
     )
 

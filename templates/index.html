@@ -81,10 +81,16 @@
               📊
             </div>
           </div>
-          <div class="stat-value" id="volume">$89.4B</div>
-          <div class="stat-change positive">
-            <span>↗</span>
-            <span>+12.8% (24h)</span>
+          <div class="stat-value" id="volume">
+            ${{ "{:.2f}B".format(total_volume / 1_000_000_000_000) }}
+          </div>
+          <div
+            class="stat-change {% if total_volume_change >= 0 %}positive{% else %}negative{% endif %}"
+          >
+            <span
+              >{% if total_volume_change >= 0 %}↗{% else %}↘{% endif %}</span
+            >
+            <span>{{ "{:+.2f}%".format(total_volume_change) }} (24h)</span>
           </div>
         </div>
 
