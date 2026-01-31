@@ -13,6 +13,8 @@ Cryptocurrency trading is highly speculative and involves significant risk. User
 
 ---
 
+## Project Description
+
 **CryptoTrendNotifier** is a Python application that tracks real-time Cryptocurrency prices, sends instant alerts for significant price changes, and predicts future price trends using machine learning. It’s built with APIs, webhooks, and data-driven forecasting techniques, making it ideal for crypto enthusiasts, traders, and developers exploring financial data applications.
 
 ---
